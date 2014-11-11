@@ -11,3 +11,20 @@
  *= require_self
  *= require_tree .
  */
+
+a { color: #000; text-decoration: none; }
+a:hover { color: #F00; }
+#first-line {
+	height: 60px;
+	background: url(main_11.jpg) repeat-x 0px 0px;
+}
+#first-line ul { list-style: none; margin: 0px; padding: 0px; }
+#first-line ul li .a10{ float:left; padding: 0px 10px; height: 60px;   }
+#first-line ul li .a1{ float:right; padding: 0px 10px; height: 60px;   }
+#first-line ul li .a2{ float:right; padding: 0px 10px; height: 60px;   }
+#first-line ul li .a3{ float:right; padding: 0px 10px; height: 60px;   }
+#first-line ul li .a4{ float:right; padding: 0px 10px; height: 60px;   }
+
+#menu { border: 1px solid #CCC; height:40px; background: #eee;}
+#menu ul { list-style: none; margin: 0px; padding: 0px; }
+#menu ul li { float:left; padding: 0px 0px 0px 30px; height: 40px; line-height: 40px; font-size:150%; }

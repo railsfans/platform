@@ -55,7 +55,7 @@ Ext.onReady(function() {
         items: [
 	        Ext.create('Ext.Component', {
 	            region: 'north',
-	            height: 32, 
+	            height: 100, 
 	            contentEl: 'header'
 	        }), 
 	        {
