@@ -1,0 +1,104 @@
+<ul>
+
+  <li id="repo-management" class="left-menu">
+     <%= link_to manager_importmaterial_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_11.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">入库管理</div>
+     <% end %>
+     
+     <%= link_to manager_outportmaterial_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_12.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">出库管理</div>
+     <% end %>
+     
+     
+     
+     <%= link_to manager_all_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_13.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">批量管理</div>
+     <% end %>
+     
+     <%= link_to manager_allpart_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_14.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">配件管理</div>
+     <% end %>
+  </li>
+  
+  <li id="samplerepo-management" class="left-menu">
+     <%= link_to manager_sample_importmaterial_path(:format=>:js, :sample=>true),  :remote=>true do %>
+     <div><%= image_tag("shortcuts_11.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">入库管理</div>
+     <% end %>
+     
+     <%= link_to manager_sample_outportmaterial_path(:format=>:js, :sample=>true), :remote=>true do %>
+     <div><%= image_tag("shortcuts_12.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">出库管理</div>
+     <% end %>
+     
+     
+     
+     <%= link_to manager_sample_all_path(:format=>:js, :sample=>true), :remote=>true do %>
+     <div><%= image_tag("shortcuts_13.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">样片管理</div>
+     <% end %>
+     
+     <%= link_to manager_sample_allpart_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_14.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">配件管理</div>
+     <% end %>
+  </li>
+
+  <li id="tree" class="left-menu">
+  	<% if false %>
+     <%= link_to code_importcode_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_11.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">编码导入</div>
+     <% end %>
+    <% end %>
+
+     <%= link_to code_coderule_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_12.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">编码规则</div>
+     <% end %>
+  </li>
+
+
+
+  <li id="suppliertree" class="left-menu">
+     <%= link_to supplier_list_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_13.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">供应商查看</div>
+     <% end %>
+     <%= link_to supplier_importsupplier_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_12.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">供应商导入</div>
+     <% end %>
+  </li>
+   
+  <li id="bom-management" class="left-menu">
+     <%= link_to project_list_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_13.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">项目查看</div>
+     <% end %>
+    
+  </li>
+
+  <li id="user-management" class="left-menu">
+    <%= link_to user_edit_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_11.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">修改密码</div>
+     <% end %>
+    <%= link_to user_data_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_12.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">修改资料</div>
+     <% end %>
+     <% if current_user.role == 'root' %>
+      <%= link_to user_add_path(:format=>:js), :remote=>true do %>
+     <div><%= image_tag("shortcuts_13.png", :class=>'menu-icon') %></div>
+     <div class="menu-text">添加用户</div>
+     <% end %>
+     <% end %>
+  </li>
+  
+   
+</ul>

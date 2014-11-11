@@ -1,0 +1,11 @@
+<% if false %>
+<audio id="player" controls="true" src="http://mp3.wooeu.com/mp3.php/15314202/mp3wooeu.mp3">你的浏览器太烂了，请更换浏览器先。</audio>
+<% end %>
+<div id="login-info">
+  <span id="result"></span>
+   &nbsp;&nbsp;&nbsp;&nbsp;
+  <span>欢迎您，<%= User.find(session[:user_id]).username %></span>
+  <span class="color-gray">|</span>
+<%= link_to t('sign_out'),logout_path %>
+</div>
+
