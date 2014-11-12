@@ -4,6 +4,8 @@ Platform::Application.routes.draw do
 	resource  :session
 	match '/login' => "sessions#new", :as => "login" 
 	match '/logout' => "sessions#destroy", :as => "logout"
+	match '/test' => "home#test", :as => "test"
+	match '/init' => "home#init", :as => "init"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

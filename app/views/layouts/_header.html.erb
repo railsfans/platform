@@ -10,17 +10,20 @@
 <% end %>
 <div id="first-line">
 <ul>
-<li><a href="#" class="a10"><img src="assets/main_12.jpg" alt=""></a></li>
-<li><a href="#" class="a1"><img src="assets/main_17.jpg" alt=""></a></li>
-<li><a href="#" class="a2"><img src="assets/main_18.jpg" alt=""></a></li>
-<li><a href="#" class="a3"><img src="assets/main_19.jpg" alt=""></a></li>
-<li><a href="#" class="a4"><img src="assets/main_20.jpg" alt=""></a></li>
+<li><div class="a10"><img src="assets/main_12.jpg" alt=""></div></li>
+<li><%= link_to image_tag("../images/main_17.jpg", :border=>0, :class => 'a1'), 
+logout_path %></li>
+<li><%= link_to image_tag("main_18.jpg", :border=>0, :class => 'a2'), 
+test_path(:format=>:js), :remote=>true %></li>
+<li><%= link_to image_tag("../images/main_19.jpg", :border=>0, :class => 'a3'), 
+init_path(:format=>:js), :remote=>true %></li>
+<li><div id="combine"><div id="nav_l"></div><div id="combine_in"><%=  image_tag("main_20.jpg", :border=>0, :class => 'a4') %><div id="info">用户: 小王</div><div id="info">所属单位: 派出所</div></div><div id="nav_r"></div></div></li>
 </ul>
 </div>
 <div id="menu">
 <ul>
-<li><a href="#">我的桌面</a></li>
-<li><a href="#">新增人员</a></li>
+<li><%= link_to "我的桌面", init_path(:format=>:js), :remote=>true %></li>
+<li><%= link_to "新增人员", test_path(:format=>:js), :remote=>true %></li>
 <li><a href="#">人员列表</a></li>
 <li><a href="#">征兵联审</a></li>
 <li><a href="#">统计分析</a></li>

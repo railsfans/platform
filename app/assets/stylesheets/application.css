@@ -23,8 +23,80 @@ a:hover { color: #F00; }
 #first-line ul li .a1{ float:right; padding: 0px 10px; height: 60px;   }
 #first-line ul li .a2{ float:right; padding: 0px 10px; height: 60px;   }
 #first-line ul li .a3{ float:right; padding: 0px 10px; height: 60px;   }
-#first-line ul li .a4{ float:right; padding: 0px 10px; height: 60px;   }
+#first-line ul li .a4{ float:left; padding: 0px;  padding-top: 14px; padding-right: 5px; }
 
 #menu { border: 1px solid #CCC; height:40px; background: #eee;}
 #menu ul { list-style: none; margin: 0px; padding: 0px; }
 #menu ul li { float:left; padding: 0px 0px 0px 30px; height: 40px; line-height: 40px; font-size:150%; }
+
+#combine_in {
+	float: right;
+	width: 150px;
+	height: 60px;
+//	border: 1px solid #ccc;
+}
+
+#info {
+	padding-top: 14px;
+//	font-size: 120%;
+	line-height: 10px;
+	color: #1e90ff;
+}
+#system_info {
+	margin: 0 auto;
+	width: 600px;
+}
+#time {
+	float: right;
+}
+#nav_r {
+	width: 9px;
+	height: 60px;
+	float: left;
+	background: url(main_14.jpg) no-repeat;
+}
+
+#nav_l {
+	width: 9px;
+	height: 60px;
+	float: right;
+	background: url(main_16.jpg) no-repeat;
+}
+
+#combine {
+	width: 180px;
+	height: 60px;
+//	border: 1px solid #CCC;
+	float: right;
+//	padding: 0px 10px;
+	background: url(main_09.jpg) repeat-x
+}
+
+#test {
+	width: 200px;
+	background: url(body.jpg) no-repeat 0px 0px;
+}
+.title {
+	height: 200px;
+	width: 600px;
+//	border: 1px solid #CCC;
+	margin: 44px auto 0;
+}
+.style1 {
+	color: #ff0;
+	font-size: 300%;
+	font-weight:bold;
+	float: left;
+	padding-right: 20px;
+	padding-left: 40px;
+}
+.style2 {
+	font-size: 150%;
+	color: #000;
+	font-weight:bold;
+	letter-spacing: 18px;
+	padding: 6px 0px 0px 0px;
+}
+.style3 {
+	color: #a9a9a9;
+}

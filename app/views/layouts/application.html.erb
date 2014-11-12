@@ -6,16 +6,20 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body onload=window_onload()>
 
 <% cache "layout" do %>
 <div id="header">
   <%= render :partial => "layouts/header" %>
 </div>
+<div id="footer">
+  <%= render :partial => "layouts/footer" %>
+</div>
 <% end %>
 <div id="home-page">
   <%= yield %>
 </div>
+
 
 </body>
 </html>

@@ -47,6 +47,23 @@ Ext.onReady(function() {
     $("#platform").text(platform);	
     $("#broswer").text(broswer);
     
+	var mainpanel =new Ext.create('Ext.panel.Panel', {
+        width: 150,
+        height: 150,
+        border: false,
+        frame: false,
+        layout: 'fit',
+    	bodyStyle: "background: #fff url('assets/body.jpg') no-repeat 0px 0px;background-position: 50% 90%;",
+    //    bodyStyle:"background-image:url('assets/body.jpg'); no-repeat; padding:55px 5px 0",
+    //    style: {
+	//	    background:'#ffffff',
+	//	    backgroundImage: 'url(assets/body.jpg)',
+	//	    backgroundSize: '10% 85%',
+	//	    backgroundRepeat: 'no-repeat',
+	//	    backgroundPosition: 'bottom left',
+	//	},
+        html: '<div class="title"><span class="style1">龙湾区公安分局</span><span><li class="style2">征兵政审系统</li><li class="style3">Conscript Political Examination System</li></span></div>'
+    });
     
     Ext.QuickTips.init();
     var viewport = Ext.create('Ext.Viewport', {
@@ -64,13 +81,14 @@ Ext.onReady(function() {
 	            border:true,
 	            layout:"fit",
 	            items: [     
-	                {
-	                contentEl: 'home-page',
-	                autoScroll: true
-	            }]
+	                mainpanel
+	               ]
+	        }, {
+	            region: 'south',
+	            contentEl: 'footer',
+	            height: 20,
 	        }
 		]
     });
-
 });
    
