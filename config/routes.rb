@@ -6,6 +6,7 @@ Platform::Application.routes.draw do
 	match '/logout' => "sessions#destroy", :as => "logout"
 	match '/test' => "home#test", :as => "test"
 	match '/init' => "home#init", :as => "init"
+	match '/bus' => "home#bus", :as => "bus"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

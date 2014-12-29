@@ -10,25 +10,33 @@
 <% end %>
 <div id="first-line">
 <ul>
-<li><div class="a10"><img src="assets/main_12.jpg" alt=""></div></li>
+<li><div class="a10"><img src="assets/main_12.jpg" alt="logo"></div></li>
 <li><%= link_to image_tag("../images/main_17.jpg", :border=>0, :class => 'a1'), 
 logout_path %></li>
 <li><%= link_to image_tag("main_18.jpg", :border=>0, :class => 'a2'), 
 test_path(:format=>:js), :remote=>true %></li>
 <li><%= link_to image_tag("../images/main_19.jpg", :border=>0, :class => 'a3'), 
 init_path(:format=>:js), :remote=>true %></li>
+<% if true %>
 <li><div id="combine"><div id="nav_l"></div><div id="combine_in"><%=  image_tag("main_20.jpg", :border=>0, :class => 'a4') %><div id="info">用户: 小王</div><div id="info">所属单位: 派出所</div></div><div id="nav_r"></div></div></li>
+<% end %>
 </ul>
 </div>
 <div id="menu">
 <ul>
+<% if false %>
+<li><a href="#">新增城市</a></li>
+<li><%= link_to "服务器管理", test_path(:format=>:js), :remote=>true %></li>
+<li><%= link_to "车辆管理", bus_path(:format=>:js), :remote=>true %></li>
+<% else %>
 <li><%= link_to "我的桌面", init_path(:format=>:js), :remote=>true %></li>
 <li><%= link_to "新增人员", test_path(:format=>:js), :remote=>true %></li>
-<li><a href="#">人员列表</a></li>
+<li><%= link_to "人员列表", bus_path(:format=>:js), :remote=>true %></li>
 <li><a href="#">征兵联审</a></li>
 <li><a href="#">统计分析</a></li>
 <li><a href="#">用户管理</a></li>
 <li><a href="#">部门管理</a></li>
 <li><a href="#">帮助中心</a></li>
+<% end %>
 </ul>
 </div>
