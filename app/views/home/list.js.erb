@@ -1,0 +1,74 @@
+var itemsPerPage=20
+var recordstore = Ext.create('Ext.data.Store', {
+    autoLoad: false,
+    fields:['num','name','birthday','age','IDNumber','education','score','recordin_place','recordin_people','suo_leader','zhian_leader','ju_leader','shangji_leader'],
+    pageSize: itemsPerPage,  
+    proxy: {
+        type: 'ajax',
+        url: 'home/allsolider.json',   
+        	reader: {
+        		type: 'json',
+        		root: 'gridData',
+            	totalProperty: 'totalCount'
+        	}
+    	}
+	});
+recordstore.load({
+	params:{
+    		start:0,
+        	limit: itemsPerPage,
+    }
+});
+var grid=Ext.create('Ext.grid.Panel', {
+    title: '人员列表',
+    store: recordstore,
+    columns: [
+		{ header: '编号',  dataIndex: 'num',flex: 1, align: 'center',renderer: function (value, meta, record) {
+						return value;
+					} },
+		{ header: '姓名',  dataIndex: 'age',flex: 1, align: 'center' },
+		{ header: '出生日期',  dataIndex: 'birthday',flex: 1, align: 'center' },
+		{ header: '年龄',  dataIndex: 'age',flex: 1, align: 'center' },
+		{ header: '身份证',  dataIndex: 'IDNumber',flex: 1, align: 'center' },
+		{ header: '学历',  dataIndex: 'education',flex: 1, align: 'center' },
+		{ header: '得分',  dataIndex: 'score',flex: 1, align: 'center' },
+		{ header: '录入单位',  dataIndex: 'recordin_place',flex: 1, align: 'center' },
+		{ header: '录入人',  dataIndex: 'recordin_people',flex: 1, align: 'center' },
+		{ header: '所领导',  dataIndex: 'suo_leader',flex: 1, align: 'center' },
+		{ header: '治安',  dataIndex: 'zhian_leader',flex: 1, align: 'center' },
+		{ header: '局领导',  dataIndex: 'ju_leader',flex: 1, align: 'center' },
+		{ header: '上级意见',  dataIndex: 'shangji_leader',flex: 1, align: 'center' }
+	],
+    width: 400,
+    height: 125,
+    selType: 'rowmodel',
+    dockedItems: [ {
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [
+                {
+			    	xtype: 'textfield',
+			    	hideLabel: true,
+			    	width: 150,
+			    	id: "search_material",
+			    },{ xtype: 'button', text: '<%= t('checkshort') %>',cls: 'startbutton', width: 100, handler: function(){ checkbomfile() }, id: "checkshort" },{ xtype: 'button', text: '<%= t('backup store') %>',cls: 'startbutton', width: 70, handler: function(){ backupstore(); }, id: "backupstore" },{xtype: 'tbspacer', width: 240}
+            ]
+         },{
+        xtype: 'pagingtoolbar',
+        store: recordstore,    
+        dock: 'bottom',
+        displayInfo: true, 
+        items:[
+    		'-',
+    	]    
+	}],
+});
+var tabpanel=Ext.create('Ext.tab.Panel', {
+    width: 400,
+    height: 400,
+    items: [grid]
+});
+var work_space = Ext.getCmp('work-space');
+work_space.removeAll();
+work_space.add(tabpanel);
+work_space.doLayout();

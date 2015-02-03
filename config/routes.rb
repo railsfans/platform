@@ -7,6 +7,7 @@ Platform::Application.routes.draw do
 	match '/test' => "home#test", :as => "test"
 	match '/init' => "home#init", :as => "init"
 	match '/bus' => "home#bus", :as => "bus"
+	match '/list' => "home#list", :as => "list"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
