@@ -3,6 +3,8 @@ class HomeController < ApplicationController
 before_filter :authenticate, :only=>:index
   def index
   end
+  def formpanel
+  end
   def test
   	@record=[]
   	respond_to do |format|

@@ -8,6 +8,7 @@ Platform::Application.routes.draw do
 	match '/init' => "home#init", :as => "init"
 	match '/bus' => "home#bus", :as => "bus"
 	match '/list' => "home#list", :as => "list"
+	match '/formpanel' => "home#formpanel", :as => "formpanel"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
