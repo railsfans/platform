@@ -1,0 +1,550 @@
+var img_reg = /\.([jJ][pP][gG]){1}$|\.([jJ][pP][eE][gG]){1}$|\.([gG][iI][fF]){1}$|\.([pP][nN][gG]){1}$|\.([bB][mM][pP]){1}$/; 
+function getFullPath(obj) {
+    if (obj) {
+        // ie
+        if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+            obj.select();
+            return document.selection.createRange().text;
+        }
+        // firefox
+        else if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
+            if (obj.files) {
+                return obj.files.item(0).getAsDataURL();
+            }
+            return obj.value;
+        }
+        return obj.value;
+    }
+}
+formPanel = Ext.widget('form', {
+    title: '<%= t('personal info') %>',
+    frame: true,
+    width: 550,
+    bodyPadding: 5,
+	autoScroll: true,
+    fieldDefaults: {
+        labelAlign: 'right',
+        labelWidth: 90,
+        msgTarget: 'qtip'
+    },
+    listeners : {     
+        'render' : function(f) {  
+            console.log('here');  
+            this.form.findField('file-idx').on('render', function() {  
+                //通過change事件,图片也动态跟踪选择的图片变化  
+                Ext.get('file-idx').on('change',  
+                    function(field, newValue, oldValue) {  
+                    //得到选择的图片路径  
+                    //  var url = getFullPath(Ext.get('file-idx').dom);
+                    	console.log(Ext.get('file-idx').getValue());
+                    var url = 'file://'+ Ext.get('file-idx').dom.value;  
+                    //   alert("url = " + url);     
+                    //是否是规定的图片类型  
+                    if (img_reg.test(url)) {  
+                        if (Ext.isIE) {  
+                            var image = Ext.get('imageBrowse').dom;     
+                            image.src = Ext.BLANK_IMAGE_URL;// 覆盖原来的图片  
+                            image.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = url;     
+                        }// 支持FF  
+                        else {  
+                            Ext.get('imageBrowse').dom.src = Ext.get('file-idx').dom.files.item(0).getAsDataURL();  
+                        }  
+                    }  
+                }, this);     
+            }, this);     
+        }     
+    },  
+    items: [
+	    {
+	        xtype: 'fieldset',
+	        title: '<%= t('first base personal info') %>',
+	        defaultType: 'textfield',
+	        layout: 'anchor',
+	        defaults: {
+	            anchor: '100%'
+	        },
+	        items: [{
+				xtype: 'container',
+				layout: 'column',
+				items : [{
+					columnWidth : .8,
+					layout : "form",
+    				frame: true,
+    				bodyPadding: 'padding:0px 5px 0px 0px',
+    				border:false,
+					items : [{
+				            xtype: 'container',
+				            layout: 'hbox',
+				            defaultType: 'textfield',
+				            items: [{
+				                fieldLabel: '<%= t('personal num') %>',
+				                name: 'code',
+				                flex: 1,
+				                allowBlank: true
+				            }, {
+				                fieldLabel: '<%= t('personal code') %>',
+				                name: 'code',
+				                flex: 1,
+				                allowBlank: true
+				            }, {
+				                fieldLabel: '<%= t('name') %>',
+				                name: 'code',
+				                flex: 1,
+				                allowBlank: true
+				            }]
+				        },{
+				            xtype: 'component',
+				            width: 10,
+				            height: 10
+				        },{
+				            xtype: 'container',
+				            layout: 'hbox',
+				            defaultType: 'textfield',
+				            items: [{
+				                fieldLabel: '<%= t('used_name') %>',
+				                name: 'code',
+				                flex: 1,
+				                allowBlank: true
+				            }, {
+				                fieldLabel: '<%= t('housetype') %>',
+				                name: 'code',
+				                flex: 1,
+				                allowBlank: true
+				            }, {
+								flex: 1,
+			                    xtype:          'combo',
+			                    mode:           'local',
+			                    value:          'han',
+			                    triggerAction:  'all',
+			                    forceSelection: true,
+			                    editable:       false,
+			                    fieldLabel:     '<%= t('nation') %>',
+			                    name:           'nation',
+			                    displayField:   'name',
+			                    valueField:     'value',
+			                    queryMode: 'local',
+			                    store:          Ext.create('Ext.data.Store', {
+			                        fields : ['name', 'value'],
+			                        data   : [
+			                            {name : '<%= t('han_nation') %>',   value: 'han'},
+			                            {name : '<%= t('miao_nation') %>',  value: 'miao'},
+			                            {name : '<%= t('other_nation') %>',  value: 'other'}
+			                        ]
+			                    })
+			                }]
+				        },{
+				            xtype: 'component',
+				            width: 10,
+				            height: 10
+				        },{
+				            xtype: 'container',
+				            layout: 'hbox',
+				            defaultType: 'textfield',
+				            items: [{
+								flex: 1,
+			                    xtype:          'combo',
+			                    mode:           'local',
+			                    value:          'male',
+			                    triggerAction:  'all',
+			                    forceSelection: true,
+			                    editable:       false,
+			                    fieldLabel:     '<%= t('sex') %>',
+			                    name:           'sex',
+			                    displayField:   'name',
+			                    valueField:     'value',
+			                    queryMode: 'local',
+			                    store:          Ext.create('Ext.data.Store', {
+			                        fields : ['name', 'value'],
+			                        data   : [
+			                            {name : '<%= t('male') %>',   value: 'male'},
+			                            {name : '<%= t('female') %>',  value: 'female'}
+			                        ]
+			                    })
+			                },{
+				                fieldLabel: '<%= t('birthday') %>',
+				                name: 'code',
+				                flex: 1,
+				                allowBlank: true,
+				                xtype: 'datefield'
+				            }, {
+				                fieldLabel: '<%= t('age') %>',
+				                name: 'code',
+				                flex: 1,
+				                allowBlank: true
+				            }]
+				        },{
+				            xtype: 'component',
+				            width: 10,
+				            height: 10
+				        },{
+				            xtype: 'container',
+				            layout: 'hbox',
+				            defaultType: 'textfield',
+				            items: [{
+				                fieldLabel: '<%= t('household') %>',
+				                name: 'code',
+				                flex: 1,
+				                allowBlank: true
+				            }, {
+								flex: 1,
+			                    xtype:          'combo',
+			                    mode:           'local',
+			                    value:          'married',
+			                    triggerAction:  'all',
+			                    forceSelection: true,
+			                    editable:       false,
+			                    fieldLabel:     '<%= t('marriage') %>',
+			                    name:           'marriage',
+			                    displayField:   'name',
+			                    valueField:     'value',
+			                    queryMode: 'local',
+			                    store:          Ext.create('Ext.data.Store', {
+			                        fields : ['name', 'value'],
+			                        data   : [
+			                            {name : '<%= t('married') %>',   value: 'married'},
+			                            {name : '<%= t('un_married') %>',  value: 'un_married'}
+			                        ]
+			                    })
+			                }, {
+							    xtype: 'fieldcontainer',
+							    fieldLabel: '<%= t('education') %>',
+							    layout: 'hbox',
+							    combineErrors: true,
+							    flex: 1,
+							    defaultType: 'textfield',
+							    defaults: {
+							        hideLabel: 'true'
+							    },
+							    items: [{
+									flex: 3,
+							        xtype:          'combo',
+							        mode:           'local',
+							        value:          'college',
+							        triggerAction:  'all',
+							        forceSelection: true,
+							        editable:       false,
+							        fieldLabel:     '<%= t('education') %>',
+							        name:           'education',
+							        displayField:   'name',
+							        valueField:     'value',
+							        queryMode: 'local',
+							        store:          Ext.create('Ext.data.Store', {
+							            fields : ['name', 'value'],
+							            data   : [
+							                {name : '<%= t('college') %>',   value: 'college'},
+							                {name : '<%= t('highschool') %>',  value: 'highschool'}
+							            ]
+							        })
+							    }, {
+									flex: 2,
+							        xtype:          'combo',
+							        mode:           'local',
+							        value:          'new_graduate',
+							        triggerAction:  'all',
+							        forceSelection: true,
+							        editable:       false,
+							        fieldLabel:     '<%= t('education') %>',
+							        name:           'education',
+							        displayField:   'name',
+							        valueField:     'value',
+							        queryMode: 'local',
+							        store:          Ext.create('Ext.data.Store', {
+							            fields : ['name', 'value'],
+							            data   : [
+							                {name : '<%= t('new_graduate') %>',   value: 'new_graduate'},
+							                {name : '<%= t('old_graduate') %>',  value: 'old_graduate'}
+							            ]
+							        })
+							    }]
+							}]
+				        },{
+				            xtype: 'component',
+				            width: 10,
+				            height: 10
+				        },{
+				            xtype: 'container',
+				            layout: 'hbox',
+				            defaultType: 'textfield',
+				            items: [{
+								flex: 1,
+			                    xtype:          'combo',
+			                    mode:           'local',
+			                    value:          'party_people',
+			                    triggerAction:  'all',
+			                    forceSelection: true,
+			                    editable:       false,
+			                    fieldLabel:     '<%= t('polity') %>',
+			                    name:           'polity',
+			                    displayField:   'name',
+			                    valueField:     'value',
+			                    queryMode: 'local',
+			                    store:          Ext.create('Ext.data.Store', {
+			                        fields : ['name', 'value'],
+			                        data   : [
+			                            {name : '<%= t('party_people') %>',   value: 'party_people'},
+			                            {name : '<%= t('league_people') %>',  value: 'league_people'},
+			                            {name : '<%= t('public_people') %>',  value: 'public_people'}
+			                        ]
+			                    })
+				        }, {
+								flex: 1,
+			                    xtype:          'combo',
+			                    mode:           'local',
+			                    value:          'no',
+			                    triggerAction:  'all',
+			                    forceSelection: true,
+			                    editable:       false,
+			                    fieldLabel:     '<%= t('religion') %>',
+			                    name:           'religion',
+			                    displayField:   'name',
+			                    valueField:     'value',
+			                    queryMode: 'local',
+			                    store:          Ext.create('Ext.data.Store', {
+			                        fields : ['name', 'value'],
+			                        data   : [
+			                            {name : '<%= t('have_no') %>',   value: 'no'},
+			                            {name : '<%= t('have_yes') %>',  value: 'yes'}
+			                        ]
+			                    })
+			                }, {
+								flex: 1,
+			                    xtype:          'combo',
+			                    mode:           'local',
+			                    value:          'no',
+			                    triggerAction:  'all',
+			                    forceSelection: true,
+			                    editable:       false,
+			                    fieldLabel:     '<%= t('faith') %>',
+			                    name:           'faith',
+			                    displayField:   'name',
+			                    valueField:     'value',
+			                    queryMode: 'local',
+			                    store:          Ext.create('Ext.data.Store', {
+			                        fields : ['name', 'value'],
+			                        data   : [
+			                            {name : '<%= t('have_no') %>',   value: 'no'},
+			                            {name : '<%= t('have_yes') %>',  value: 'yes'}
+			                        ]
+			                    })
+			                }]
+				        }]
+				},{
+					columnWidth : .2,
+					layout : "form",
+    				frame: true,
+    				defaults:{border:false},
+    			//	bodyStyle: 'padding: 10px;',
+					items : [{  
+			           xtype : 'box',     
+			           id : 'browseImage',  
+			           fieldLabel : "预览图片", 
+			           bodyStyle: 'margin: 0 auto', 
+			           autoEl : {  
+			          	//     width : 300,  
+			          	//     height : 300,  
+							tag : 'img',  
+			         	// type : 'image',  
+			            //   src : Ext.BLANK_IMAGE_URL,
+			           		src : 'assets/rails.png',  
+			               	style : 'margin: 0 auto;display: block;',  
+			               	complete : 'off',     
+			               	id : 'imageBrowse'  
+			           }  
+	        		},{  
+			           id : 'file-idx',  
+			           name : 'file',  
+			           inputType : "file",  
+			           fieldLabel : '上传图片',  
+			           xtype : 'textfield',  
+			           blankText:'上传图片不能为空',  
+			           anchor : '100%'   
+			        }]
+				}]
+			},{
+	            xtype: 'component',
+	            width: 10,
+	            height: 10
+	        },{
+	            xtype: 'container',
+	            layout: 'hbox',
+	            defaultType: 'textfield',
+	            items: [{
+	                fieldLabel: '<%= t('skill') %>',
+	                name: 'code',
+	                flex: 1,
+	                allowBlank: true
+	            }]
+	        },{
+	            xtype: 'component',
+	            width: 10,
+	            height: 10
+	        },{
+			    xtype: 'container',
+			    layout: 'hbox',
+			    defaultType: 'textfield',
+			    items: [{
+	                xtype:'textfield',
+	                fieldLabel: 'First Name',
+	                anchor: '-5',
+	                flex: 1,
+	                labelAlign: 'top',
+	                name: 'first'
+	            },{
+		            xtype: 'component',
+		            width: 10,
+		            height: 10
+		        }, {
+	                xtype:'textfield',
+	                fieldLabel: 'Company',
+	                anchor: '-5',
+	                flex: 1,
+	                labelAlign: 'top',
+	                name: 'company'
+			    }]
+			},{
+	            xtype: 'component',
+	            width: 10,
+	            height: 10
+	        },{
+	            xtype: 'container',
+	            layout: 'hbox',
+	            defaultType: 'textfield',
+	            items: [{
+	                fieldLabel: '<%= t('household_place') %>',
+	                name: 'household_place',
+	                flex: 1,
+	                allowBlank: true
+	            },{
+	                fieldLabel: '<%= t('household_police') %>',
+	                name: 'household_police',
+	                flex: 1,
+	                allowBlank: true
+	            },{
+	                fieldLabel: '<%= t('address') %>',
+	                name: 'address',
+	                flex: 1,
+	                allowBlank: true
+	            }]
+	        },{
+				xtype: 'image',
+				fieldLabel: 'Image Here',
+				src: 'assets/rails.png',
+				width: 50,
+				height: 500
+			}, {
+		        xtype: 'fieldset',
+		        title: '<%= t('second education info') %>',
+		        defaultType: 'textfield',
+		        layout: 'anchor',
+		        defaults: {
+		            anchor: '100%'
+		        },
+		        items: [{
+		            xtype: 'container',
+		            layout: 'hbox',
+		            defaultType: 'textfield',
+		            items: [{
+		                fieldLabel: '<%= t('household_place') %>',
+		                name: 'household_place_1',
+		                flex: 1,
+		                allowBlank: true
+		            },{
+		                fieldLabel: '<%= t('household_police') %>',
+		                name: 'household_police_1',
+		                flex: 1,
+		                allowBlank: true
+		            },{
+		                fieldLabel: '<%= t('address') %>',
+		                name: 'address_1',
+		                flex: 1,
+		                allowBlank: true
+		            }, {
+                        xtype: 'button',
+                        text   : 'Add another',
+                        handler: function() {
+                            var container = this.up('fieldset');
+                            var config = Ext.apply({}, container.initialConfig.items[0]);
+                            console.log(config.items[0]);
+                            config.items[0].name=config.items[0].name+container.items.length.toString();
+                            config.items[1].name=config.items[1].name+container.items.length.toString();
+                            config.items[2].name=config.items[2].name+container.items.length.toString();
+                            config.fieldLabel = container.items.length + 1;
+                            container.add(config);
+                        }
+                    }, {
+                        xtype: 'button',
+                        text   : 'remove another',
+                        handler: function(a,b,c,d) {
+                        	 var container = this.up('fieldset');
+                        	 console.log(container);
+                        	 console.log(a);
+                        	 console.log(b);
+                        	 console.log(container.initialConfig.items[0]);
+                        	 console.log(container.initialConfig.items[0].items[0]);
+                        	 console.log(container.items);
+                        	 console.log(container.items.items[0]);
+                        //	 container.items.items[0].hide();
+                        //	container.items.items[0].destroy();
+                        	console.log(container.items.length);
+                        	console.log(this);
+                        //		container.remove(container.items.items[0]);
+                        	container.remove(this.isContained);
+                        }
+                    }]
+		        }]
+	       	},{
+	            xtype: 'container',
+	            layout: 'hbox',
+	            defaultType: 'textfield',
+	            items: [{
+	                xtype: 'displayfield',
+            		name: 'displayfield1',
+            		fieldLabel: '登记人',
+            		value: '<span style="color:green;">黄日华</span>',
+            		flex: 1
+	            },{
+	                xtype: 'displayfield',
+            		name: 'displayfield1',
+            		fieldLabel: '入录单位',
+            		value: '<span style="color:green;">温州派出所</span>',
+            		flex: 1
+	            },{
+	                fieldLabel: '<%= t('birthday') %>',
+				  	name: 'code',
+				  	flex: 1,
+				 	allowBlank: true,
+				  	xtype: 'datefield',
+				  	value: new Date()
+	            }]
+	        },{
+                xtype: 'button',
+                text   : '修改',
+                handler: function() {
+                	if (!formPanel.getForm().isValid()) return;
+                	formPanel.getForm().submit({
+				        waitMsg: '正在提交数据',
+				        waitTitle: '提示',
+				        url: 'formpanel.json',
+				        method: 'POST',
+				        success: function(form, action) {
+				            Ext.Msg.alert('提示', '保存成功');
+				        },
+				        failure: function(form, action) {
+				            Ext.Msg.alert('提示', '原因如下：');
+				        }
+				    });
+                }
+            }
+	   		]
+	    }
+	 ]
+});
+var tabpanel=Ext.create('Ext.tab.Panel', {
+    width: 400,
+    height: 400,
+    items: [formPanel]
+});
+var work_space = Ext.getCmp('work-space');
+work_space.removeAll();
+work_space.add(tabpanel);
+work_space.doLayout();

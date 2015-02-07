@@ -4,6 +4,10 @@ before_filter :authenticate, :only=>:index
   def index
   end
   def formpanel
+  	respond_to do |format|
+  		format.json { render :json=>{:success=>true}, :content_type => 'text/html'}
+  		format.js
+  	end
   end
   def test
   	@record=[]
